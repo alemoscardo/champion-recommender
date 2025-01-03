@@ -58,10 +58,3 @@ yarn dev
 - Radix UI Components
 - Riot Games Data Dragon API
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-MIT License - See LICENSE file for details
