@@ -83,6 +83,7 @@ export function ChampionSelect() {
   const [selectedRole, setSelectedRole] = useState<Role>('ADC')
   const [pendingAlly, setPendingAlly] = useState<ChampionData | null>(null)
   const [gameVersion, setGameVersion] = useState<string>('')
+  const [useOpenAI, setUseOpenAI] = useState(false)
 
   useEffect(() => {
     const initChampions = async () => {
@@ -153,7 +154,8 @@ export function ChampionSelect() {
             role: a.role
           })),
           enemies,
-          targetRole: selectedRole
+            targetRole: selectedRole,
+            useOpenAI
         }),
       })
 
@@ -323,13 +325,32 @@ export function ChampionSelect() {
               )}
             </div>
           )}
-          <Button
-            className="w-full mt-4"
+            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <span className="text-sm">Model:</span>
+              <Button
+              variant={useOpenAI ? "outline" : "default"}
+              size="sm"
+              onClick={() => setUseOpenAI(false)}
+              >
+              Gemini
+              </Button>
+              <Button
+              variant={useOpenAI ? "default" : "outline"}
+              size="sm"
+              onClick={() => setUseOpenAI(true)}
+              >
+              OpenAI
+              </Button>
+            </div>
+            </div>
+            <Button
+            className="w-full"
             onClick={handleGetRecommendations}
             disabled={allies.length === 0 || isGettingRecommendations}
-          >
+            >
             {isGettingRecommendations ? 'Getting Recommendations...' : 'Get Recommendations'}
-          </Button>
+            </Button>
         </Card>
       </div>
     </div>
